@@ -1,0 +1,93 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    color: black;
+    background-color: pink;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color:black;
+    color:pink;
+    padding: 10px 20px;
+    font-size: 24px;
+}
+
+.container {
+    position: relative;
+    margin: 100px;
+}
+
+.movie-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.movie-row::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.movie {
+    height: 800px;
+    width: 280px;
+    margin-right: 50px;
+    background-color: black;
+    transition: transform 0.2s;
+}
+
+.movie:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.scrollButton {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.scrollButton.left {
+    left: 0;
+}
+
+.scrollButton.right {
+    right: 0;
+}
+
+h2 {
+    padding-left: 890px;
+    font-size: 30px;
+}
+
+#exitButton {
+    width: 100px; /* Set the width of the button */
+    height: 50px; /* Set the height of the button */
+    font-size: 20px;
+    color: darkblue; 
+}   
+
+.movie-container {
+        position: relative;
+}
+
+
+.movie-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background */
+    color: #fff; /* Set the text color to white */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 8px; /* Add padding for better readability */
+    margin: 0; /* Remove default margin */
+    color: pink;
+    font-size: 30px;
+}
