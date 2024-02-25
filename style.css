@@ -7,9 +7,9 @@ body, html {
 }
 
 .navbar {
-    background-color:black;
-    color:pink;
-    padding: 10px 20px;
+    background-color: black;
+    color: pink;
+    padding: 0px;
     font-size: 24px;
 }
 
@@ -29,7 +29,7 @@ body, html {
 }
 
 .movie {
-    height: 800px;
+    height: 500px;
     width: 280px;
     margin-right: 50px;
     background-color: black;
@@ -43,11 +43,11 @@ body, html {
 
 .scrollButton {
     position: absolute;
-    top: 50%;
+    top: 0%;
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
-    padding: 10px;
+    padding: 0px;
     cursor: pointer;
     z-index: 3;
 }
@@ -61,21 +61,20 @@ body, html {
 }
 
 h2 {
-    padding-left: 890px;
+    padding-left: 460px;
     font-size: 30px;
 }
 
 #exitButton {
-    width: 100px; /* Set the width of the button */
-    height: 50px; /* Set the height of the button */
+    width: 100px;
+    height: 50px;
     font-size: 20px;
-    color: darkblue; 
-}   
-
-.movie-container {
-        position: relative;
+    color: darkblue;
 }
 
+.movie-container {
+    position: relative;
+}
 
 .movie-text {
     position: absolute;
@@ -83,11 +82,9 @@ h2 {
     left: 0;
     right: 0;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background */
-    color: #fff; /* Set the text color to white */
-    font-size: 16px; /* Adjust the font size as needed */
-    padding: 8px; /* Add padding for better readability */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: pink; /* Pink text color */
+    font-size: 30px; /* Larger font size */
+    padding: 8px; /* Padding for better readability */
     margin: 0; /* Remove default margin */
-    color: pink;
-    font-size: 30px;
 }
