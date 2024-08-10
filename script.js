@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const movies = [
         { src: "images/Jisoo/JISOO WALLPAPER.jpg", title: "Jisoo", url: "videos/Jisoo/JISOO - ‘꽃(FLOWER)’ M_V.mp4"},
@@ -21,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const text = document.createElement('p');
         text.innerText = movie.title;
-        text.className = 'movie-text';
+        text.className = 'movie-text title-bar'; // Apply the class
 
         container.appendChild(img);
         container.appendChild(text);
