@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BLACKPINK</title>
-    <link rel="icon" type="images/x-icon" href="images/Blackpink Logo/BLACKPINK (logo).jpg" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      rel="icon"
+      type="images/x-icon"
+      href="images/Blackpink Logo/BLACKPINK (logo).jpg"
+    />
+    <!-- Use a clean modern font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">BLACKPINK</div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <button id="themeToggle" aria-pressed="false" class="theme-toggle">
+          🌙
+        </button>
+      </nav>
+    </header>
 
-<div class="navbar">BLACKPINK</div>
-    <div class="container">
-    <div class="movie-row" id="movieRow">
-        <!-- Movie Thumbnails will be added here by JavaScript -->
-   <!-- </div>
-    <button class="scrollButton left" onclick="scrollLeft()">‹</button>
-    <button class="scrollButton right" onclick="scrollRight()">›</button>
-</div> -->
+    <main class="main">
+      <section class="hero">
+        <h1 class="hero-title">BLACKPINK — Official Fan Media</h1>
+        <p class="hero-sub">
+          Browse photos and official videos. Click a card to play.
+        </p>
+      </section>
 
-<div id="videoPlayer" style="display:none;">
-    <video id="movieVideo" width="750" controls></video>
-    <button id="exitButton">Exit</button>
-</div>
+      <section class="gallery" aria-label="Video gallery">
+        <div class="movie-row" id="movieRow">
+          <!-- Movie thumbnails injected by JavaScript -->
+        </div>
+      </section>
 
+      <!-- Video modal -->
+      <div id="videoPlayer" class="video-modal" aria-hidden="true">
+        <div class="video-inner">
+          <button id="exitButton" class="close-btn" aria-label="Close video">
+            ✕
+          </button>
+          <video id="movieVideo" class="movie-video" controls></video>
+        </div>
+      </div>
+    </main>
 
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
-<div id="videoPlayer" style="display:none;">
-    <video id="movieVideo" width="640" controls>
-        
-    </video>
-</div>
