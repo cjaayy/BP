@@ -3,53 +3,783 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BLACKPINK</title>
+    <title>BLACKPINK | In Your Area</title>
     <link
       rel="icon"
       type="images/x-icon"
       href="images/Blackpink Logo/BLACKPINK (logo).jpg"
     />
-    <!-- Use a clean modern font -->
+    <!-- Modern fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+      <img
+        src="images/Blackpink Logo/BLACKPINK (logo).jpg"
+        alt="Loading"
+        class="loader-logo"
+      />
+      <span class="loader-text">BLACKPINK</span>
+    </div>
+
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
     <header class="site-header">
-      <div class="brand">BLACKPINK</div>
+      <div class="brand">
+        <img
+          src="images/Blackpink Logo/BLACKPINK (logo).jpg"
+          alt="BLACKPINK Logo"
+          class="brand-logo"
+        />
+        <span class="brand-text">BLACKPINK</span>
+      </div>
       <nav class="site-nav" aria-label="Main navigation">
-        <button id="themeToggle" aria-pressed="false" class="theme-toggle">
-          🌙
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#members" class="nav-link">Members</a></li>
+          <li><a href="#videos" class="nav-link">Videos</a></li>
+          <li><a href="#songs" class="nav-link">Songs</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#timeline" class="nav-link">Timeline</a></li>
+          <li><a href="#facts" class="nav-link">Facts</a></li>
+          <li><a href="#quiz" class="nav-link">Quiz</a></li>
+          <li><a href="#concert" class="nav-link">Concert</a></li>
+          <li><a href="#countdown" class="nav-link">Event</a></li>
+          <li><a href="#awards" class="nav-link">Awards</a></li>
+          <li><a href="#bias" class="nav-link">Bias</a></li>
+        </ul>
+        <button
+          id="themeToggle"
+          aria-pressed="false"
+          class="theme-toggle"
+          title="Toggle theme"
+        >
+          <i class="fas fa-moon"></i>
+        </button>
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </nav>
     </header>
 
     <main class="main">
-      <section class="hero">
-        <h1 class="hero-title">BLACKPINK — Official Fan Media</h1>
-        <p class="hero-sub">
-          Browse photos and official videos. Click a card to play.
-        </p>
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <p class="hero-tag">Welcome to the official fan page</p>
+          <h1 class="hero-title">
+            <span class="title-line">BLACKPINK</span>
+            <span class="title-highlight">In Your Area</span>
+          </h1>
+          <p class="hero-sub">
+            Experience the music, the style, and the magic of the world's
+            biggest K-pop girl group
+          </p>
+          <div class="hero-buttons">
+            <a href="#videos" class="btn btn-primary">
+              <i class="fas fa-play"></i> Watch Videos
+            </a>
+            <a href="#members" class="btn btn-secondary">
+              <i class="fas fa-users"></i> Meet the Members
+            </a>
+          </div>
+        </div>
+        <div class="hero-scroll">
+          <span>Scroll Down</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </section>
 
-      <section class="gallery" aria-label="Video gallery">
+      <!-- Members Section -->
+      <section class="members-section" id="members">
+        <div class="section-header">
+          <span class="section-tag">The Squad</span>
+          <h2 class="section-title">Meet the Members</h2>
+          <p class="section-subtitle">
+            Four talented artists who conquered the world
+          </p>
+        </div>
+        <div class="members-grid" id="membersGrid">
+          <!-- Member cards injected by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Videos Section -->
+      <section class="videos-section" id="videos">
+        <div class="section-header">
+          <span class="section-tag">Music Videos</span>
+          <h2 class="section-title">Official Solo Releases</h2>
+          <p class="section-subtitle">Click to watch exclusive performances</p>
+        </div>
         <div class="movie-row" id="movieRow">
           <!-- Movie thumbnails injected by JavaScript -->
         </div>
       </section>
 
-      <!-- Video modal -->
+      <!-- Songs/Discography Section -->
+      <section class="songs-section" id="songs">
+        <div class="section-header">
+          <span class="section-tag">Discography</span>
+          <h2 class="section-title">All Songs</h2>
+          <p class="section-subtitle">
+            Explore BLACKPINK's complete music collection
+          </p>
+        </div>
+        <div class="songs-tabs">
+          <button class="songs-tab active" data-tab="group">Group Songs</button>
+          <button class="songs-tab" data-tab="solo">Solo Songs</button>
+          <button class="songs-tab" data-tab="albums">Albums</button>
+        </div>
+        <div class="songs-content">
+          <div class="songs-grid" id="songsGrid">
+            <!-- Songs injected by JavaScript -->
+          </div>
+        </div>
+        <div class="now-playing" id="nowPlaying">
+          <div class="now-playing-info">
+            <i class="fas fa-music"></i>
+            <span id="nowPlayingText">Select a song to see details</span>
+          </div>
+          <div class="now-playing-controls">
+            <a
+              href="https://open.spotify.com/artist/41MozSoPIsD1dJM0CLPjZF"
+              target="_blank"
+              class="spotify-btn"
+            >
+              <i class="fab fa-spotify"></i> Listen on Spotify
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Photo Gallery Section -->
+      <section class="gallery-section" id="gallery">
+        <div class="section-header">
+          <span class="section-tag">Photo Gallery</span>
+          <h2 class="section-title">Stunning Visuals</h2>
+          <p class="section-subtitle">Browse through amazing photos</p>
+        </div>
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="jisoo">Jisoo</button>
+          <button class="filter-btn" data-filter="jennie">Jennie</button>
+          <button class="filter-btn" data-filter="rose">Rosé</button>
+          <button class="filter-btn" data-filter="lisa">Lisa</button>
+        </div>
+        <div class="photo-gallery" id="photoGallery">
+          <!-- Photos injected by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fab fa-youtube"></i>
+            <span class="stat-number" data-target="95">0</span>
+            <span class="stat-unit">M+</span>
+            <p class="stat-label">YouTube Subscribers</p>
+          </div>
+          <div class="stat-card">
+            <i class="fab fa-spotify"></i>
+            <span class="stat-number" data-target="48">0</span>
+            <span class="stat-unit">M+</span>
+            <p class="stat-label">Spotify Listeners</p>
+          </div>
+          <div class="stat-card">
+            <i class="fab fa-instagram"></i>
+            <span class="stat-number" data-target="65">0</span>
+            <span class="stat-unit">M+</span>
+            <p class="stat-label">Instagram Followers</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-trophy"></i>
+            <span class="stat-number" data-target="200">0</span>
+            <span class="stat-unit">+</span>
+            <p class="stat-label">Awards Won</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <section class="timeline-section" id="timeline">
+        <div class="section-header">
+          <span class="section-tag">Journey</span>
+          <h2 class="section-title">BLACKPINK Timeline</h2>
+          <p class="section-subtitle">From debut to global domination</p>
+        </div>
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          <div class="timeline-item" data-year="2016">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">August 2016</span>
+              <h3>Debut</h3>
+              <p>
+                BLACKPINK debuts with "Square One" featuring "Whistle" and
+                "Boombayah" - both songs hit #1!
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" data-year="2018">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">June 2018</span>
+              <h3>DDU-DU DDU-DU</h3>
+              <p>
+                Breaks record for most-viewed K-pop group MV debut in 24 hours
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" data-year="2019">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">April 2019</span>
+              <h3>Coachella</h3>
+              <p>
+                First K-pop girl group to perform at Coachella - making history!
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" data-year="2020">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">October 2020</span>
+              <h3>THE ALBUM</h3>
+              <p>
+                First full-length album debuts at #2 on Billboard 200 - highest
+                for K-pop girl group
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" data-year="2022">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">September 2022</span>
+              <h3>Born Pink World Tour</h3>
+              <p>
+                Biggest world tour by a K-pop girl group with 1.5M+ attendees
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" data-year="2024">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2024</span>
+              <h3>Solo Era</h3>
+              <p>
+                All members release successful solo projects - Rosé's APT. goes
+                viral worldwide!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fun Facts Section -->
+      <section class="facts-section" id="facts">
+        <div class="section-header">
+          <span class="section-tag">Did You Know?</span>
+          <h2 class="section-title">Fun Facts</h2>
+          <p class="section-subtitle">Test your BLINK knowledge!</p>
+        </div>
+        <div class="facts-grid">
+          <div class="fact-card" data-category="trivia">
+            <div class="fact-icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>First MV to 1 Billion</h3>
+            <p>
+              "DDU-DU DDU-DU" was the first K-pop group MV to reach 1 billion
+              views on YouTube
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+          <div class="fact-card" data-category="members">
+            <div class="fact-icon"><i class="fas fa-globe"></i></div>
+            <h3>International Group</h3>
+            <p>
+              Members hail from South Korea, New Zealand, Thailand - speaking 5+
+              languages!
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+          <div class="fact-card" data-category="records">
+            <div class="fact-icon"><i class="fas fa-crown"></i></div>
+            <h3>Guinness Records</h3>
+            <p>
+              BLACKPINK holds 30+ Guinness World Records for their achievements
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+          <div class="fact-card" data-category="fashion">
+            <div class="fact-icon"><i class="fas fa-gem"></i></div>
+            <h3>Fashion Icons</h3>
+            <p>
+              All 4 members are global ambassadors for luxury brands: Chanel,
+              Dior, YSL, Celine
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+          <div class="fact-card" data-category="music">
+            <div class="fact-icon"><i class="fas fa-music"></i></div>
+            <h3>Songwriting</h3>
+            <p>
+              Members contribute to songwriting - Jennie & Jisoo wrote lyrics
+              for multiple songs
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+          <div class="fact-card" data-category="fandom">
+            <div class="fact-icon"><i class="fas fa-heart"></i></div>
+            <h3>BLINK Power</h3>
+            <p>
+              The fandom name "BLINK" combines "Black" and "Pink" - representing
+              the fans' bond
+            </p>
+            <div class="fact-glow"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section class="quiz-section" id="quiz">
+        <div class="section-header">
+          <span class="section-tag">Interactive</span>
+          <h2 class="section-title">BLINK Quiz</h2>
+          <p class="section-subtitle">How well do you know BLACKPINK?</p>
+        </div>
+        <div class="quiz-container">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+          </div>
+          <div class="quiz-card" id="quizCard">
+            <div class="quiz-question" id="quizQuestion">
+              Click Start to begin!
+            </div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-result" id="quizResult"></div>
+          </div>
+          <div class="quiz-controls">
+            <button class="btn btn-primary" id="startQuizBtn">
+              <i class="fas fa-play"></i> Start Quiz
+            </button>
+            <button
+              class="btn btn-secondary"
+              id="nextQuizBtn"
+              style="display: none"
+            >
+              Next Question <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          <div class="quiz-score" id="quizScore"></div>
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="newsletter-section">
+        <div class="newsletter-content">
+          <div class="newsletter-icon">
+            <i class="fas fa-envelope-open-text"></i>
+          </div>
+          <h2>Join the BLINK Family</h2>
+          <p>Get updates on new releases, events, and exclusive content!</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="input-group">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                required
+                id="emailInput"
+              />
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Subscribe
+              </button>
+            </div>
+          </form>
+          <p class="newsletter-note">💗 No spam, only BLACKPINK magic!</p>
+        </div>
+        <div class="newsletter-decoration">
+          <div class="floating-hearts" id="floatingHearts"></div>
+        </div>
+      </section>
+
+      <!-- Concert Experience Section -->
+      <section class="concert-section" id="concert">
+        <div class="concert-bg"></div>
+        <div class="concert-content">
+          <div class="section-header" style="color: white;">
+            <span class="section-tag">Experience</span>
+            <h2 class="section-title" style="color: white;">Virtual Concert</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Feel the energy of a BLACKPINK concert</p>
+          </div>
+          <div class="concert-stage">
+            <div class="stage-lights">
+              <div class="light-beam"></div>
+              <div class="light-beam"></div>
+              <div class="light-beam"></div>
+            </div>
+            <div class="stage-screen" id="concertScreen">
+              <img src="images/Blackpink Logo/BLACKPINK (logo).jpg" alt="Stage" class="stage-poster" id="stagePoster">
+              <video class="stage-video" id="concertVideo" playsinline>
+                <source src="videos/Lisa/LISA - 'MONEY' EXCLUSIVE PERFORMANCE VIDEO.mp4" type="video/mp4">
+              </video>
+              <div class="stage-overlay" id="stageOverlay">
+                <div class="concert-info">
+                  <h2>BORN PINK WORLD TOUR</h2>
+                  <p>Experience the magic of BLACKPINK live</p>
+                  <div class="concert-controls">
+                    <button class="concert-btn primary" id="watchConcertBtn">
+                      <i class="fas fa-play"></i> Watch Now
+                    </button>
+                    <button class="concert-btn" id="viewSetlistBtn">
+                      <i class="fas fa-list"></i> View Setlist
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="concert-effects">
+            <button class="effect-btn" data-effect="lightstick">
+              <i class="fas fa-lightbulb"></i> Lightstick Mode
+            </button>
+            <button class="effect-btn" data-effect="cheers">
+              <i class="fas fa-hands"></i> Crowd Cheers
+            </button>
+            <button class="effect-btn" data-effect="confetti">
+              <i class="fas fa-gift"></i> Confetti
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Setlist Panel -->
+      <div class="setlist-panel">
+        <div class="setlist-header">
+          <h3><i class="fas fa-music"></i> Setlist</h3>
+          <button class="setlist-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="setlist-items">
+          <div class="setlist-item playing" data-video="videos/Lisa/LISA - 'MONEY' EXCLUSIVE PERFORMANCE VIDEO.mp4">
+            <span class="setlist-number">1</span>
+            <div class="setlist-song-info">
+              <div class="setlist-song-name">MONEY</div>
+              <div class="setlist-song-album">LALISA - Lisa</div>
+            </div>
+            <i class="fas fa-play setlist-play-icon"></i>
+          </div>
+          <div class="setlist-item" data-video="videos/Jennie/JENNIE - 'SOLO' M_V.mp4">
+            <span class="setlist-number">2</span>
+            <div class="setlist-song-info">
+              <div class="setlist-song-name">SOLO</div>
+              <div class="setlist-song-album">SOLO - Jennie</div>
+            </div>
+            <i class="fas fa-play setlist-play-icon"></i>
+          </div>
+          <div class="setlist-item" data-video="videos/Jisoo/JISOO - '꽃(FLOWER)' M_V.mp4">
+            <span class="setlist-number">3</span>
+            <div class="setlist-song-info">
+              <div class="setlist-song-name">FLOWER (꽃)</div>
+              <div class="setlist-song-album">ME - Jisoo</div>
+            </div>
+            <i class="fas fa-play setlist-play-icon"></i>
+          </div>
+          <div class="setlist-item" data-video="videos/Rose/ROSÉ - 'On The Ground' M_V.mp4">
+            <span class="setlist-number">4</span>
+            <div class="setlist-song-info">
+              <div class="setlist-song-name">On The Ground</div>
+              <div class="setlist-song-album">R - Rosé</div>
+            </div>
+            <i class="fas fa-play setlist-play-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown Section -->
+      <section class="countdown-section" id="countdown">
+        <div class="countdown-bg"></div>
+        <div class="countdown-content">
+          <h2><i class="fas fa-calendar-star"></i> Next Big Event</h2>
+          <p class="countdown-event">BLACKPINK World Tour 2025</p>
+          <div class="countdown-timer" id="countdownTimer">
+            <div class="countdown-item">
+              <span class="countdown-number" id="days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="minutes">00</span>
+              <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="seconds">00</span>
+              <span class="countdown-label">Seconds</span>
+            </div>
+          </div>
+          <button class="btn btn-primary countdown-btn">
+            <i class="fas fa-bell"></i> Get Notified
+          </button>
+        </div>
+      </section>
+
+      <!-- Awards Section -->
+      <section class="awards-section" id="awards">
+        <div class="section-header">
+          <span class="section-tag">Achievements</span>
+          <h2 class="section-title">Awards & Records</h2>
+          <p class="section-subtitle">Breaking barriers and making history</p>
+        </div>
+        <div class="awards-showcase">
+          <div class="award-card gold">
+            <div class="award-icon"><i class="fas fa-trophy"></i></div>
+            <h3>MTV VMAs</h3>
+            <p>Best Metaverse Performance 2022</p>
+          </div>
+          <div class="award-card platinum">
+            <div class="award-icon"><i class="fas fa-medal"></i></div>
+            <h3>Billboard</h3>
+            <p>#1 on Billboard 200</p>
+          </div>
+          <div class="award-card gold">
+            <div class="award-icon"><i class="fas fa-award"></i></div>
+            <h3>Guinness Records</h3>
+            <p>30+ World Records</p>
+          </div>
+          <div class="award-card diamond">
+            <div class="award-icon"><i class="fas fa-gem"></i></div>
+            <h3>YouTube</h3>
+            <p>Most Subscribed Artist</p>
+          </div>
+          <div class="award-card platinum">
+            <div class="award-icon"><i class="fas fa-star"></i></div>
+            <h3>Spotify</h3>
+            <p>1B+ Streams Multiple Songs</p>
+          </div>
+          <div class="award-card gold">
+            <div class="award-icon"><i class="fas fa-crown"></i></div>
+            <h3>Forbes</h3>
+            <p>Power List 2023</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bias Picker Section -->
+      <section class="bias-section" id="bias">
+        <div class="section-header">
+          <span class="section-tag">Fun</span>
+          <h2 class="section-title">Who's Your Bias?</h2>
+          <p class="section-subtitle">Vote for your favorite member!</p>
+        </div>
+        <div class="bias-container">
+          <div class="bias-options">
+            <button class="bias-option" data-member="jisoo">
+              <img src="images/Jisoo/JISOO WALLPAPER.jpg" alt="Jisoo" />
+              <span>Jisoo</span>
+              <div class="bias-votes">
+                <div class="bias-bar" style="--percentage: 25%"></div>
+                <span class="bias-percent">25%</span>
+              </div>
+            </button>
+            <button class="bias-option" data-member="jennie">
+              <img src="images/Jennie/Jennie Solo Wallpaper I xX_RACH_Xx.jpg" alt="Jennie" />
+              <span>Jennie</span>
+              <div class="bias-votes">
+                <div class="bias-bar" style="--percentage: 28%"></div>
+                <span class="bias-percent">28%</span>
+              </div>
+            </button>
+            <button class="bias-option" data-member="rose">
+              <img src="images/Rose/BLACKPINK ROSÉ ON THE GROUND WALLPAPER.jpg" alt="Rosé" />
+              <span>Rosé</span>
+              <div class="bias-votes">
+                <div class="bias-bar" style="--percentage: 24%"></div>
+                <span class="bias-percent">24%</span>
+              </div>
+            </button>
+            <button class="bias-option" data-member="lisa">
+              <img src="images/Lisa/download.jpg" alt="Lisa" />
+              <span>Lisa</span>
+              <div class="bias-votes">
+                <div class="bias-bar" style="--percentage: 23%"></div>
+                <span class="bias-percent">23%</span>
+              </div>
+            </button>
+          </div>
+          <div class="bias-result" id="biasResult"></div>
+        </div>
+      </section>
+
+      <!-- Music Player Widget -->
+      <div class="music-widget" id="musicWidget">
+        <button class="music-widget-fab" id="musicWidgetFab">
+          <i class="fas fa-music"></i>
+        </button>
+        <div class="music-widget-panel">
+          <div class="music-widget-header">
+            <span><i class="fas fa-music"></i> Now Playing</span>
+            <button class="widget-close" id="widgetClose">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        <div class="music-widget-content">
+          <div class="widget-cover">
+            <img src="images/Blackpink Logo/BLACKPINK (logo).jpg" alt="Album" id="widgetCover" />
+            <div class="widget-visualizer">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="widget-info">
+            <p class="widget-title" id="widgetTitle">Select a song</p>
+            <p class="widget-artist" id="widgetArtist">BLACKPINK</p>
+          </div>
+          <div class="widget-progress">
+            <div class="progress-bar" id="widgetProgress"></div>
+          </div>
+          <div class="widget-controls">
+            <button class="widget-btn" id="prevTrack"><i class="fas fa-step-backward"></i></button>
+            <button class="widget-btn play-btn" id="playPauseWidget"><i class="fas fa-play"></i></button>
+            <button class="widget-btn" id="nextTrack"><i class="fas fa-step-forward"></i></button>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Video Modal -->
+      <div id="videoPlayer" class="video-modal" aria-hidden="true">
       <div id="videoPlayer" class="video-modal" aria-hidden="true">
         <div class="video-inner">
           <button id="exitButton" class="close-btn" aria-label="Close video">
-            ✕
+            <i class="fas fa-times"></i>
           </button>
           <video id="movieVideo" class="movie-video" controls></video>
         </div>
       </div>
+
+      <!-- Photo Lightbox -->
+      <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose">
+          <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-content">
+          <img id="lightboxImg" src="" alt="Gallery image" />
+          <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+      </div>
     </main>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements"></div>
+
+    <!-- Crowd Cheers Container -->
+    <div class="crowd-cheers"></div>
+
+    <!-- Lightstick Cursor -->
+    <div class="lightstick-cursor">
+      <img src="https://emoji.discadia.com/emojis/2f97c681-124f-447d-a5a3-fecc202ec73d.gif" alt="BLACKPINK Lightstick">
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img
+            src="images/Blackpink Logo/BLACKPINK (logo).jpg"
+            alt="BLACKPINK"
+            class="footer-logo"
+          />
+          <p class="footer-tagline">BLACKPINK In Your Area 💗</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#members">Members</a>
+          <a href="#videos">Videos</a>
+          <a href="#songs">Songs</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#quiz">Quiz</a>
+        </div>
+        <div class="footer-social">
+          <h4>Follow BLACKPINK</h4>
+          <div class="social-icons">
+            <a
+              href="https://youtube.com/@BLACKPINK"
+              target="_blank"
+              class="social-link"
+              title="YouTube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a
+              href="https://instagram.com/blackpinkofficial"
+              target="_blank"
+              class="social-link"
+              title="Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              href="https://twitter.com/BLACKPINK"
+              target="_blank"
+              class="social-link"
+              title="Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="https://open.spotify.com/artist/41MozSoPIsD1dJM0CLPjZF"
+              target="_blank"
+              class="social-link"
+              title="Spotify"
+            >
+              <i class="fab fa-spotify"></i>
+            </a>
+            <a
+              href="https://tiktok.com/@blackpinkofficial"
+              target="_blank"
+              class="social-link"
+              title="TikTok"
+            >
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Made with 💗 by BLINK | © 2024 Fan Page</p>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
   </body>
