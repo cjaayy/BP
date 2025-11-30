@@ -1171,62 +1171,802 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ====== QUIZ DATA & FUNCTIONALITY ======
-  const quizQuestions = [
-    {
-      question: "When did BLACKPINK debut?",
-      options: ["2015", "2016", "2017", "2018"],
-      correct: 1,
+  // Massive BLACKPINK knowledge base for generating unlimited unique questions
+  const bpKnowledge = {
+    members: {
+      Jisoo: {
+        fullName: "Kim Jisoo",
+        birthday: "January 3, 1995",
+        birthYear: 1995,
+        birthplace: "Seoul, South Korea",
+        nationality: "Korean",
+        position: ["Lead Vocalist", "Visual"],
+        zodiac: "Capricorn",
+        height: "162 cm",
+        pets: ["Dalgom", "Bami"],
+        languages: ["Korean", "Japanese", "Basic Chinese"],
+        traineeYears: 5,
+        mbti: "ISFJ",
+        solo: "FLOWER",
+        soloAlbum: "ME",
+        drama: "Snowdrop",
+        brands: ["Dior", "Cartier"],
+        nicknames: ["Jichu", "Chuchu", "Kim Chi-Choo"],
+        instrument: "Drums",
+        emoji: "🐰",
+      },
+      Jennie: {
+        fullName: "Kim Jennie",
+        birthday: "January 16, 1996",
+        birthYear: 1996,
+        birthplace: "Seoul, South Korea",
+        nationality: "Korean",
+        position: ["Main Rapper", "Lead Vocalist"],
+        zodiac: "Capricorn",
+        height: "163 cm",
+        pets: ["Kuma", "Kai"],
+        languages: ["Korean", "English", "Japanese"],
+        traineeYears: 6,
+        mbti: "ENFP",
+        solo: "SOLO",
+        soloAlbum: "Ruby",
+        livedAbroad: "New Zealand",
+        brands: ["Chanel", "Calvin Klein"],
+        nicknames: ["Nini", "Jendeukie", "Human Chanel"],
+        instrument: "Piano",
+        emoji: "🐱",
+      },
+      Rosé: {
+        fullName: "Park Chaeyoung",
+        englishName: "Roseanne Park",
+        birthday: "February 11, 1997",
+        birthYear: 1997,
+        birthplace: "Auckland, New Zealand",
+        grewUp: "Melbourne, Australia",
+        nationality: "Korean-New Zealand",
+        position: ["Main Vocalist", "Lead Dancer"],
+        zodiac: "Aquarius",
+        height: "168 cm",
+        pets: ["Hank"],
+        languages: ["Korean", "English", "Japanese"],
+        traineeYears: 4,
+        mbti: "ISFP",
+        solo: "On The Ground",
+        soloAlbum: "R",
+        bSide: "Gone",
+        brands: ["Saint Laurent", "Tiffany & Co."],
+        nicknames: ["Rosie", "Pasta", "Chipmunk"],
+        instrument: "Guitar",
+        emoji: "🌹",
+      },
+      Lisa: {
+        fullName: "Lalisa Manoban",
+        birthName: "Pranpriya Manoban",
+        birthday: "March 27, 1997",
+        birthYear: 1997,
+        birthplace: "Bangkok, Thailand",
+        nationality: "Thai",
+        position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"],
+        zodiac: "Aries",
+        height: "167 cm",
+        pets: ["Leo", "Luca", "Lily", "Louis"],
+        languages: ["Thai", "Korean", "English", "Japanese", "Basic Chinese"],
+        traineeYears: 5,
+        mbti: "ESFJ",
+        solo: "LALISA",
+        soloAlbum: "LALISA",
+        bSide: "MONEY",
+        brands: ["Celine", "Bulgari", "MAC"],
+        nicknames: ["Lili", "Lalice", "Thai Princess"],
+        instrument: "Ukulele",
+        mentor: "Youth With You",
+        emoji: "🦋",
+      },
     },
-    {
+    songs: {
+      titleTracks: [
+        "Boombayah",
+        "Whistle",
+        "Playing With Fire",
+        "Stay",
+        "As If It's Your Last",
+        "DDU-DU DDU-DU",
+        "Forever Young",
+        "Kill This Love",
+        "Don't Know What To Do",
+        "How You Like That",
+        "Ice Cream",
+        "Lovesick Girls",
+        "Pink Venom",
+        "Shut Down",
+        "Yeah Yeah Yeah",
+        "Typa Girl",
+        "Hard to Love",
+        "The Happiest Girl",
+        "Tally",
+      ],
+      collaborations: {
+        "Ice Cream": "Selena Gomez",
+        "Sour Candy": "Lady Gaga",
+        "Kiss and Make Up": "Dua Lipa",
+        "Bet You Wanna": "Cardi B",
+      },
+      albums: {
+        "Square One": 2016,
+        "Square Two": 2016,
+        "Square Up": 2018,
+        "Kill This Love": 2019,
+        "THE ALBUM": 2020,
+        "Born Pink": 2022,
+      },
+    },
+  };
+
+  // Question generators - each function creates a unique question
+  const questionGenerators = [
+    // Member birthday questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const otherDates = members
+        .filter((m) => m !== member)
+        .map((m) => bpKnowledge.members[m].birthday);
+      return {
+        question: `When is ${member}'s birthday?`,
+        answer: info.birthday,
+        wrong: shuffleArray(otherDates).slice(0, 3),
+      };
+    },
+    // Member position questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const allPositions = [
+        "Main Vocalist",
+        "Lead Vocalist",
+        "Main Rapper",
+        "Lead Rapper",
+        "Main Dancer",
+        "Lead Dancer",
+        "Visual",
+        "Maknae",
+        "Sub Vocalist",
+      ];
+      const wrongPositions = allPositions.filter(
+        (p) => !info.position.includes(p)
+      );
+      return {
+        question: `Which position does ${member} hold in BLACKPINK?`,
+        answer: info.position[0],
+        wrong: shuffleArray(wrongPositions).slice(0, 3),
+      };
+    },
+    // Member birthplace questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const places = [
+        "Seoul, South Korea",
+        "Bangkok, Thailand",
+        "Auckland, New Zealand",
+        "Melbourne, Australia",
+        "Tokyo, Japan",
+        "Los Angeles, USA",
+      ];
+      return {
+        question: `Where was ${member} born?`,
+        answer: info.birthplace,
+        wrong: shuffleArray(places.filter((p) => p !== info.birthplace)).slice(
+          0,
+          3
+        ),
+      };
+    },
+    // Member pet questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const pet = info.pets[Math.floor(Math.random() * info.pets.length)];
+      return {
+        question: `Which member has a pet named ${pet}?`,
+        answer: member,
+        wrong: shuffleArray(members.filter((m) => m !== member)),
+      };
+    },
+    // Member solo song questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const soloSongs = [
+        "SOLO",
+        "LALISA",
+        "MONEY",
+        "On The Ground",
+        "Gone",
+        "FLOWER",
+        "All Eyes On Me",
+      ];
+      return {
+        question: `What is ${member}'s debut solo song?`,
+        answer: info.solo,
+        wrong: shuffleArray(soloSongs.filter((s) => s !== info.solo)).slice(
+          0,
+          3
+        ),
+      };
+    },
+    // Member zodiac questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const zodiacs = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+      ];
+      return {
+        question: `What is ${member}'s zodiac sign?`,
+        answer: info.zodiac,
+        wrong: shuffleArray(zodiacs.filter((z) => z !== info.zodiac)).slice(
+          0,
+          3
+        ),
+      };
+    },
+    // Member height questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const heights = [
+        "160 cm",
+        "162 cm",
+        "163 cm",
+        "165 cm",
+        "167 cm",
+        "168 cm",
+        "170 cm",
+      ];
+      return {
+        question: `What is ${member}'s height?`,
+        answer: info.height,
+        wrong: shuffleArray(heights.filter((h) => h !== info.height)).slice(
+          0,
+          3
+        ),
+      };
+    },
+    // Member MBTI questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const mbtis = [
+        "ISFJ",
+        "ENFP",
+        "ISFP",
+        "ESFJ",
+        "INTJ",
+        "INFP",
+        "ENTJ",
+        "ISTP",
+      ];
+      return {
+        question: `What is ${member}'s MBTI personality type?`,
+        answer: info.mbti,
+        wrong: shuffleArray(mbtis.filter((m) => m !== info.mbti)).slice(0, 3),
+      };
+    },
+    // Member brand ambassador questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const brand = info.brands[0];
+      const allBrands = [
+        "Dior",
+        "Chanel",
+        "Saint Laurent",
+        "Celine",
+        "Cartier",
+        "Bulgari",
+        "Tiffany & Co.",
+        "Calvin Klein",
+        "MAC",
+      ];
+      return {
+        question: `Which luxury brand is ${member} an ambassador for?`,
+        answer: brand,
+        wrong: shuffleArray(
+          allBrands.filter((b) => !info.brands.includes(b))
+        ).slice(0, 3),
+      };
+    },
+    // Member trainee years questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const years = ["3 years", "4 years", "5 years", "6 years", "7 years"];
+      return {
+        question: `How many years was ${member} a trainee before debut?`,
+        answer: `${info.traineeYears} years`,
+        wrong: shuffleArray(
+          years.filter((y) => y !== `${info.traineeYears} years`)
+        ).slice(0, 3),
+      };
+    },
+    // Member nickname questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const nickname =
+        info.nicknames[Math.floor(Math.random() * info.nicknames.length)];
+      return {
+        question: `Which member is known by the nickname "${nickname}"?`,
+        answer: member,
+        wrong: shuffleArray(members.filter((m) => m !== member)),
+      };
+    },
+    // Member instrument questions
+    () => {
+      const members = Object.keys(bpKnowledge.members);
+      const member = members[Math.floor(Math.random() * members.length)];
+      const info = bpKnowledge.members[member];
+      const instruments = [
+        "Guitar",
+        "Piano",
+        "Drums",
+        "Ukulele",
+        "Violin",
+        "Flute",
+      ];
+      return {
+        question: `Which instrument can ${member} play?`,
+        answer: info.instrument,
+        wrong: shuffleArray(
+          instruments.filter((i) => i !== info.instrument)
+        ).slice(0, 3),
+      };
+    },
+    // Collaboration questions
+    () => {
+      const collabs = Object.entries(bpKnowledge.songs.collaborations);
+      const [song, artist] =
+        collabs[Math.floor(Math.random() * collabs.length)];
+      const artists = [
+        "Selena Gomez",
+        "Lady Gaga",
+        "Dua Lipa",
+        "Cardi B",
+        "Ariana Grande",
+        "Taylor Swift",
+        "Billie Eilish",
+      ];
+      return {
+        question: `Who did BLACKPINK collaborate with on "${song}"?`,
+        answer: artist,
+        wrong: shuffleArray(artists.filter((a) => a !== artist)).slice(0, 3),
+      };
+    },
+    // Album year questions
+    () => {
+      const albums = Object.entries(bpKnowledge.songs.albums);
+      const [album, year] = albums[Math.floor(Math.random() * albums.length)];
+      const years = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+      ];
+      return {
+        question: `In what year was "${album}" released?`,
+        answer: year.toString(),
+        wrong: shuffleArray(years.filter((y) => y !== year.toString())).slice(
+          0,
+          3
+        ),
+      };
+    },
+    // Group facts
+    () => ({
       question: "What is BLACKPINK's official fandom name?",
-      options: ["ARMY", "BLINK", "ONCE", "STAY"],
-      correct: 1,
-    },
-    {
-      question: "Which member was born in New Zealand?",
-      options: ["Jisoo", "Jennie", "Rosé", "Lisa"],
-      correct: 2,
-    },
-    {
-      question: "What was BLACKPINK's debut song?",
-      options: ["DDU-DU DDU-DU", "Kill This Love", "Whistle", "Boombayah"],
-      correct: 2,
-    },
-    {
-      question: "Which member is the main dancer?",
-      options: ["Jisoo", "Jennie", "Rosé", "Lisa"],
-      correct: 3,
-    },
-    {
-      question: "What is Jisoo's solo debut song?",
-      options: ["SOLO", "FLOWER", "On The Ground", "LALISA"],
-      correct: 1,
-    },
-    {
-      question: "Which brand is Jennie an ambassador for?",
-      options: ["Dior", "Chanel", "YSL", "Gucci"],
-      correct: 1,
-    },
-    {
+      answer: "BLINK",
+      wrong: ["ARMY", "ONCE", "STAY"],
+    }),
+    () => ({
+      question: "What company manages BLACKPINK?",
+      answer: "YG Entertainment",
+      wrong: ["SM Entertainment", "JYP Entertainment", "HYBE"],
+    }),
+    () => ({
+      question: "When did BLACKPINK debut?",
+      answer: "August 8, 2016",
+      wrong: ["June 15, 2016", "July 1, 2017", "September 12, 2015"],
+    }),
+    () => ({
+      question: "What color is BLACKPINK's official lightstick?",
+      answer: "Pink and Black",
+      wrong: ["Pink only", "Black only", "Pink and White"],
+    }),
+    () => ({
+      question: "What was BLACKPINK's first music show win on?",
+      answer: "Inkigayo",
+      wrong: ["Music Bank", "M Countdown", "Show Champion"],
+    }),
+    () => ({
+      question: "How many members are in BLACKPINK?",
+      answer: "4",
+      wrong: ["3", "5", "6"],
+    }),
+    () => ({
       question: "What year did BLACKPINK perform at Coachella?",
-      options: ["2018", "2019", "2020", "2021"],
-      correct: 1,
-    },
-    {
-      question: "Which member is known as the 'Visual' of the group?",
-      options: ["Jisoo", "Jennie", "Rosé", "Lisa"],
-      correct: 0,
-    },
-    {
+      answer: "2019",
+      wrong: ["2018", "2020", "2021"],
+    }),
+    () => ({
+      question: "Which BLACKPINK MV was the first to reach 1 billion views?",
+      answer: "DDU-DU DDU-DU",
+      wrong: ["Kill This Love", "How You Like That", "Boombayah"],
+    }),
+    () => ({
+      question: "What is the name of BLACKPINK's Netflix documentary?",
+      answer: "BLACKPINK: Light Up the Sky",
+      wrong: ["BLACKPINK: The Movie", "Born Pink", "In Your Area"],
+    }),
+    () => ({
+      question: "Which album reached #1 on Billboard 200?",
+      answer: "Born Pink",
+      wrong: ["THE ALBUM", "Square Up", "Kill This Love"],
+    }),
+    () => ({
+      question: "Who is the oldest member of BLACKPINK?",
+      answer: "Jisoo",
+      wrong: ["Jennie", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Who is the youngest member of BLACKPINK?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "Who is the tallest member of BLACKPINK?",
+      answer: "Rosé",
+      wrong: ["Jisoo", "Jennie", "Lisa"],
+    }),
+    () => ({
+      question: "Which member speaks the most languages?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "Which member was a trainee for the longest time?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member lived in New Zealand as a child?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member grew up in Australia?",
+      answer: "Rosé",
+      wrong: ["Jisoo", "Jennie", "Lisa"],
+    }),
+    () => ({
+      question: "Which member appeared in the K-drama 'Snowdrop'?",
+      answer: "Jisoo",
+      wrong: ["Jennie", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member was a mentor on 'Youth With You'?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "Which member is known as the 'Human Chanel'?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member is known for playing guitar?",
+      answer: "Rosé",
+      wrong: ["Jisoo", "Jennie", "Lisa"],
+    }),
+    () => ({
+      question: "Who is the Main Dancer of BLACKPINK?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "Who is the Main Vocalist of BLACKPINK?",
+      answer: "Rosé",
+      wrong: ["Jisoo", "Jennie", "Lisa"],
+    }),
+    () => ({
+      question: "Who is the Main Rapper of BLACKPINK?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Who is the Visual of BLACKPINK?",
+      answer: "Jisoo",
+      wrong: ["Jennie", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "What was BLACKPINK's debut song that topped charts?",
+      answer: "Whistle",
+      wrong: ["Boombayah", "Playing With Fire", "Stay"],
+    }),
+    () => ({
+      question: "Which song features Selena Gomez?",
+      answer: "Ice Cream",
+      wrong: ["Sour Candy", "Kiss and Make Up", "Bet You Wanna"],
+    }),
+    () => ({
+      question: "Which song features Lady Gaga?",
+      answer: "Sour Candy",
+      wrong: ["Ice Cream", "Kiss and Make Up", "Bet You Wanna"],
+    }),
+    () => ({
+      question: "Which song features Dua Lipa?",
+      answer: "Kiss and Make Up",
+      wrong: ["Ice Cream", "Sour Candy", "Bet You Wanna"],
+    }),
+    () => ({
+      question: "What is the name of BLACKPINK's first full album?",
+      answer: "THE ALBUM",
+      wrong: ["Born Pink", "Square Up", "Kill This Love"],
+    }),
+    () => ({
+      question: "What is the name of BLACKPINK's 2022 album?",
+      answer: "Born Pink",
+      wrong: ["THE ALBUM", "Square Up", "Pink Venom"],
+    }),
+    () => ({
+      question: "Which member is associated with the bunny emoji 🐰?",
+      answer: "Jisoo",
+      wrong: ["Jennie", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member is associated with the cat emoji 🐱?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member is associated with the rose emoji 🌹?",
+      answer: "Rosé",
+      wrong: ["Jisoo", "Jennie", "Lisa"],
+    }),
+    () => ({
+      question: "Which member is associated with the butterfly emoji 🦋?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "What is the name of Rosé's solo album?",
+      answer: "R",
+      wrong: ["LALISA", "ME", "Ruby"],
+    }),
+    () => ({
+      question: "What is the name of Lisa's solo album?",
+      answer: "LALISA",
+      wrong: ["R", "ME", "Ruby"],
+    }),
+    () => ({
+      question: "What is the name of Jisoo's solo album?",
+      answer: "ME",
+      wrong: ["R", "LALISA", "Ruby"],
+    }),
+    () => ({
+      question: "What is the B-side track on Lisa's solo album?",
+      answer: "MONEY",
+      wrong: ["Gone", "FLOWER", "SOLO"],
+    }),
+    () => ({
+      question: "What is the B-side track on Rosé's solo album?",
+      answer: "Gone",
+      wrong: ["MONEY", "FLOWER", "SOLO"],
+    }),
+    () => ({
+      question: "In what year did Jennie release 'SOLO'?",
+      answer: "2018",
+      wrong: ["2017", "2019", "2020"],
+    }),
+    () => ({
+      question: "In what year did Rosé release 'On The Ground'?",
+      answer: "2021",
+      wrong: ["2020", "2022", "2019"],
+    }),
+    () => ({
+      question: "In what year did Lisa release 'LALISA'?",
+      answer: "2021",
+      wrong: ["2020", "2022", "2019"],
+    }),
+    () => ({
+      question: "In what year did Jisoo release 'FLOWER'?",
+      answer: "2023",
+      wrong: ["2022", "2021", "2024"],
+    }),
+    () => ({
+      question: "In what year was Jisoo born?",
+      answer: "1995",
+      wrong: ["1994", "1996", "1997"],
+    }),
+    () => ({
+      question: "In what year was Jennie born?",
+      answer: "1996",
+      wrong: ["1995", "1997", "1998"],
+    }),
+    () => ({
+      question: "In what year was Rosé born?",
+      answer: "1997",
+      wrong: ["1996", "1998", "1995"],
+    }),
+    () => ({
+      question: "In what year was Lisa born?",
+      answer: "1997",
+      wrong: ["1996", "1998", "1995"],
+    }),
+    () => ({
+      question: "What is Rosé's English name?",
+      answer: "Roseanne Park",
+      wrong: ["Rose Park", "Chaeyoung Park", "Rosie Park"],
+    }),
+    () => ({
+      question: "What was Lisa's birth name?",
+      answer: "Pranpriya Manoban",
+      wrong: ["Lalisa Manoban", "Lalice Manoban", "Pranya Manoban"],
+    }),
+    () => ({
+      question: "How many cats does Lisa have?",
+      answer: "4",
+      wrong: ["2", "3", "5"],
+    }),
+    () => ({
+      question: "What is the name of Jennie's dog?",
+      answer: "Kuma",
+      wrong: ["Dalgom", "Hank", "Leo"],
+    }),
+    () => ({
+      question: "What is the name of Jisoo's dog?",
+      answer: "Dalgom",
+      wrong: ["Kuma", "Hank", "Bami"],
+    }),
+    () => ({
+      question: "What is the name of Rosé's dog?",
+      answer: "Hank",
+      wrong: ["Kuma", "Dalgom", "Leo"],
+    }),
+    () => ({
+      question: "What was BLACKPINK's first world tour called?",
+      answer: "In Your Area",
+      wrong: ["Born Pink", "The Show", "4+1 Project"],
+    }),
+    () => ({
+      question: "What is BLACKPINK's 2022-2023 world tour called?",
+      answer: "Born Pink World Tour",
+      wrong: ["In Your Area", "The Show", "Pink Venom Tour"],
+    }),
+    () => ({
+      question: "Which member's solo MV features a tank?",
+      answer: "Lisa",
+      wrong: ["Jennie", "Rosé", "Jisoo"],
+    }),
+    () => ({
+      question: "Which member's solo MV was filmed in an art museum?",
+      answer: "Jisoo",
+      wrong: ["Jennie", "Rosé", "Lisa"],
+    }),
+    () => ({
       question: "What is Lisa's nationality?",
-      options: ["Korean", "Australian", "Thai", "American"],
-      correct: 2,
-    },
+      answer: "Thai",
+      wrong: ["Korean", "Australian", "American"],
+    }),
+    () => ({
+      question: "What is Rosé's nationality?",
+      answer: "Korean-New Zealand",
+      wrong: ["Korean", "Australian", "Thai"],
+    }),
+    () => ({
+      question: "Which member has the most Instagram followers in BLACKPINK?",
+      answer: "Lisa",
+      wrong: ["Jennie", "Rosé", "Jisoo"],
+    }),
+    () => ({
+      question: "What was BLACKPINK's debut double single?",
+      answer: "Boombayah & Whistle",
+      wrong: ["DDU-DU DDU-DU", "Kill This Love", "Playing With Fire"],
+    }),
+    () => ({
+      question: "Which BLACKPINK song samples a classical piece?",
+      answer: "Shut Down",
+      wrong: ["Pink Venom", "Typa Girl", "Lovesick Girls"],
+    }),
+    () => ({
+      question: "What is the name of Jennie's upcoming solo album?",
+      answer: "Ruby",
+      wrong: ["ME", "R", "LALISA"],
+    }),
+    () => ({
+      question: "Which member trained at YG for 6 years?",
+      answer: "Jennie",
+      wrong: ["Jisoo", "Rosé", "Lisa"],
+    }),
+    () => ({
+      question: "Which member is known as 'Maknae'?",
+      answer: "Lisa",
+      wrong: ["Jisoo", "Jennie", "Rosé"],
+    }),
+    () => ({
+      question: "What is Jisoo's full Korean name?",
+      answer: "Kim Jisoo",
+      wrong: ["Park Jisoo", "Lee Jisoo", "Choi Jisoo"],
+    }),
+    () => ({
+      question: "What is Jennie's full Korean name?",
+      answer: "Kim Jennie",
+      wrong: ["Park Jennie", "Lee Jennie", "Choi Jennie"],
+    }),
+    () => ({
+      question: "What is Rosé's full Korean name?",
+      answer: "Park Chaeyoung",
+      wrong: ["Kim Chaeyoung", "Lee Chaeyoung", "Choi Chaeyoung"],
+    }),
+    () => ({
+      question: "What month is BLACKPINK's anniversary?",
+      answer: "August",
+      wrong: ["June", "July", "September"],
+    }),
+    () => ({
+      question: "What day is BLACKPINK's debut anniversary?",
+      answer: "8th",
+      wrong: ["1st", "15th", "20th"],
+    }),
+    () => ({
+      question: "Which BLACKPINK song has a whistle sound effect?",
+      answer: "Whistle",
+      wrong: ["Boombayah", "Stay", "Playing With Fire"],
+    }),
   ];
 
-  let currentQuestion = 0;
+  // Shuffle function
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // Track used questions to avoid repetition
+  let usedQuestionHashes = new Set();
   let score = 0;
+  let totalAnswered = 0;
   let quizActive = false;
+  let currentQuestionData = null;
 
   const startQuizBtn = document.getElementById("startQuizBtn");
   const nextQuizBtn = document.getElementById("nextQuizBtn");
@@ -1236,31 +1976,77 @@ document.addEventListener("DOMContentLoaded", function () {
   const quizScore = document.getElementById("quizScore");
   const quizProgressBar = document.getElementById("quizProgressBar");
 
+  // Generate a unique question
+  function generateQuestion() {
+    let attempts = 0;
+    let question;
+    let hash;
+
+    // Try to get a unique question
+    while (attempts < 200) {
+      const generatorIndex = Math.floor(
+        Math.random() * questionGenerators.length
+      );
+      const generated = questionGenerators[generatorIndex]();
+      hash = `${generated.question}-${generated.answer}`;
+
+      if (!usedQuestionHashes.has(hash)) {
+        question = generated;
+        break;
+      }
+      attempts++;
+    }
+
+    // If all questions used, reset and notify
+    if (!question) {
+      usedQuestionHashes.clear();
+      showToast(
+        "info",
+        "🎉 Amazing! You've answered all questions! Starting fresh!"
+      );
+      const generatorIndex = Math.floor(
+        Math.random() * questionGenerators.length
+      );
+      question = questionGenerators[generatorIndex]();
+      hash = `${question.question}-${question.answer}`;
+    }
+
+    usedQuestionHashes.add(hash);
+
+    // Shuffle options
+    const options = shuffleArray([question.answer, ...question.wrong]);
+    const correctIndex = options.indexOf(question.answer);
+
+    return {
+      question: question.question,
+      options: options,
+      correct: correctIndex,
+    };
+  }
+
   function startQuiz() {
-    currentQuestion = 0;
     score = 0;
+    totalAnswered = 0;
     quizActive = true;
+    usedQuestionHashes.clear();
     startQuizBtn.style.display = "none";
     nextQuizBtn.style.display = "none";
-    quizScore.innerHTML = "";
+    quizScore.innerHTML = `<div class="quiz-stats">Score: <span class="score-value">0</span> | Questions: <span class="questions-value">0</span></div>`;
     showQuestion();
   }
 
   function showQuestion() {
-    if (currentQuestion >= quizQuestions.length) {
-      endQuiz();
-      return;
-    }
+    currentQuestionData = generateQuestion();
+    const q = currentQuestionData;
 
-    const q = quizQuestions[currentQuestion];
     quizQuestion.textContent = q.question;
     quizOptions.innerHTML = "";
     quizResult.innerHTML = "";
     quizResult.className = "quiz-result";
 
-    quizProgressBar.style.width = `${
-      (currentQuestion / quizQuestions.length) * 100
-    }%`;
+    // Animate progress bar based on score percentage
+    const percentage = totalAnswered > 0 ? (score / totalAnswered) * 100 : 0;
+    quizProgressBar.style.width = `${Math.min(percentage, 100)}%`;
 
     q.options.forEach((option, index) => {
       const btn = document.createElement("button");
@@ -1274,10 +2060,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function selectAnswer(index, btn) {
     if (!quizActive) return;
 
-    const q = quizQuestions[currentQuestion];
+    const q = currentQuestionData;
     const options = quizOptions.querySelectorAll(".quiz-option");
 
     options.forEach((opt) => opt.classList.add("disabled"));
+    totalAnswered++;
 
     if (index === q.correct) {
       btn.classList.add("correct");
@@ -1294,53 +2081,35 @@ document.addEventListener("DOMContentLoaded", function () {
       quizResult.classList.add("wrong");
     }
 
+    updateScoreDisplay();
     nextQuizBtn.style.display = "inline-flex";
   }
 
-  function nextQuestion() {
-    currentQuestion++;
-    nextQuizBtn.style.display = "none";
-    showQuestion();
-  }
-
-  function endQuiz() {
-    quizActive = false;
-    quizProgressBar.style.width = "100%";
-    quizQuestion.textContent = "Quiz Complete!";
-    quizOptions.innerHTML = "";
-    quizResult.innerHTML = "";
-
-    const percentage = Math.round((score / quizQuestions.length) * 100);
-    let message = "";
-    let emoji = "";
-
-    if (percentage === 100) {
-      message = "Perfect! You're a TRUE BLINK! 💗";
-      emoji = "🏆";
-    } else if (percentage >= 80) {
-      message = "Amazing! You know your BLACKPINK! 🖤";
-      emoji = "🌟";
-    } else if (percentage >= 60) {
-      message = "Good job! Keep stanning! 💕";
-      emoji = "👏";
-    } else {
-      message = "Time to watch more MVs! 💪";
-      emoji = "📺";
-    }
+  function updateScoreDisplay() {
+    const percentage =
+      totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
+    let streak = "";
+    if (percentage >= 90 && totalAnswered >= 5) streak = "🔥 On Fire!";
+    else if (percentage >= 80 && totalAnswered >= 5) streak = "⭐ Great!";
+    else if (percentage >= 70 && totalAnswered >= 5) streak = "👍 Good!";
 
     quizScore.innerHTML = `
-      <span>${emoji} ${score}/${quizQuestions.length}</span>
-      ${message}
+      <div class="quiz-stats">
+        <div class="score-main">
+          Score: <span class="score-value">${score}</span> / ${totalAnswered} 
+          (<span class="percentage-value">${percentage}%</span>)
+        </div>
+        ${streak ? `<div class="score-streak">${streak}</div>` : ""}
+        <div class="questions-unique">Unique Questions: ${
+          usedQuestionHashes.size
+        }</div>
+      </div>
     `;
+  }
 
-    startQuizBtn.textContent = "Play Again";
-    startQuizBtn.innerHTML = '<i class="fas fa-redo"></i> Play Again';
-    startQuizBtn.style.display = "inline-flex";
+  function nextQuestion() {
     nextQuizBtn.style.display = "none";
-
-    if (percentage >= 80) {
-      createConfetti(50);
-    }
+    showQuestion();
   }
 
   if (startQuizBtn) {
@@ -1349,39 +2118,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (nextQuizBtn) {
     nextQuizBtn.addEventListener("click", nextQuestion);
-  }
-
-  // ====== NEWSLETTER FORM ======
-  const newsletterForm = document.getElementById("newsletterForm");
-
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("emailInput").value;
-
-      if (email) {
-        showToast("success", `Thanks for subscribing, BLINK! 💗`);
-        newsletterForm.reset();
-        createConfetti(30);
-      }
-    });
-  }
-
-  // ====== FLOATING HEARTS FOR NEWSLETTER ======
-  const floatingHearts = document.getElementById("floatingHearts");
-
-  if (floatingHearts) {
-    for (let i = 0; i < 15; i++) {
-      const heart = document.createElement("span");
-      heart.className = "floating-heart";
-      heart.innerHTML = "💗";
-      heart.style.left = `${Math.random() * 100}%`;
-      heart.style.top = `${Math.random() * 100}%`;
-      heart.style.fontSize = `${Math.random() * 20 + 15}px`;
-      heart.style.animationDelay = `${Math.random() * 5}s`;
-      heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
-      floatingHearts.appendChild(heart);
-    }
   }
 
   // ====== SCROLL PROGRESS BAR ======
@@ -1609,12 +2345,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // ====== MUSIC WIDGET (Now Playing Bottom) ======
   initMusicWidget();
 
-  // ====== COUNTDOWN TIMER ======
-  initCountdown();
-
-  // ====== BIAS PICKER ======
-  initBiasPicker();
-
   // ====== AWARDS SECTION ======
   initAwardsSection();
 
@@ -1721,81 +2451,6 @@ function initMusicPlayerWidget() {
     const icon = playerToggle?.querySelector("i");
     if (icon) icon.className = "fas fa-times";
   }, 5000);
-}
-
-// ====== COUNTDOWN TIMER FUNCTIONS ======
-function initCountdown() {
-  const daysEl = document.getElementById("days");
-  const hoursEl = document.getElementById("hours");
-  const minutesEl = document.getElementById("minutes");
-  const secondsEl = document.getElementById("seconds");
-  const countdownBtn = document.querySelector(".countdown-btn");
-
-  if (!daysEl) return;
-
-  // Set target date - BLACKPINK World Tour 2025 (example: June 1, 2025)
-  const targetDate = new Date("2025-06-01T19:00:00").getTime();
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance < 0) {
-      daysEl.textContent = "00";
-      hoursEl.textContent = "00";
-      minutesEl.textContent = "00";
-      secondsEl.textContent = "00";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    daysEl.textContent = days.toString().padStart(2, "0");
-    hoursEl.textContent = hours.toString().padStart(2, "0");
-    minutesEl.textContent = minutes.toString().padStart(2, "0");
-    secondsEl.textContent = seconds.toString().padStart(2, "0");
-
-    // Add pulse animation when numbers change
-    [daysEl, hoursEl, minutesEl, secondsEl].forEach((el) => {
-      el.style.animation = "none";
-      el.offsetHeight; // Trigger reflow
-      el.style.animation = "countPulse 0.5s ease";
-    });
-  }
-
-  // Update every second
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // Countdown button click
-  if (countdownBtn) {
-    countdownBtn.addEventListener("click", () => {
-      showToast("success", "🔔 You'll be notified about BLACKPINK events!");
-      countdownBtn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
-      countdownBtn.style.background = "#00c853";
-
-      setTimeout(() => {
-        countdownBtn.innerHTML = '<i class="fas fa-bell"></i> Get Notified';
-        countdownBtn.style.background = "";
-      }, 3000);
-    });
-  }
-
-  // Add pulse animation style
-  const countStyle = document.createElement("style");
-  countStyle.textContent = `
-    @keyframes countPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-  `;
-  document.head.appendChild(countStyle);
 }
 
 // ====== MUSIC WIDGET (Now Playing) FUNCTIONS ======
@@ -1938,119 +2593,6 @@ function initMusicWidget() {
 
   // Initialize display
   updateDisplay();
-}
-
-// ====== BIAS PICKER FUNCTIONS ======
-function initBiasPicker() {
-  const biasOptions = document.querySelectorAll(".bias-option");
-  const biasResult = document.getElementById("biasResult");
-
-  if (!biasOptions.length) return;
-
-  // Vote counts stored in localStorage
-  let votes = JSON.parse(localStorage.getItem("blackpinkVotes")) || {
-    jisoo: 2847,
-    jennie: 3201,
-    rose: 2543,
-    lisa: 3102,
-  };
-
-  function updateVoteBars() {
-    const total = Object.values(votes).reduce((a, b) => a + b, 0);
-
-    biasOptions.forEach((option) => {
-      const member = option.dataset.member;
-      const percentage = Math.round((votes[member] / total) * 100);
-      const bar = option.querySelector(".bias-bar");
-      const percentText = option.querySelector(".bias-percent");
-
-      if (bar) bar.style.setProperty("--percentage", `${percentage}%`);
-      if (percentText) percentText.textContent = `${percentage}%`;
-    });
-  }
-
-  // Initialize vote bars
-  updateVoteBars();
-
-  biasOptions.forEach((option) => {
-    option.addEventListener("click", () => {
-      const member = option.dataset.member;
-      const memberName = member.charAt(0).toUpperCase() + member.slice(1);
-
-      // Check if already voted
-      const hasVoted = localStorage.getItem("blackpinkHasVoted");
-
-      if (hasVoted) {
-        showToast(
-          "info",
-          `You already voted! Your bias is ${localStorage.getItem(
-            "blackpinkBias"
-          )} 💗`
-        );
-        return;
-      }
-
-      // Add vote
-      votes[member]++;
-      localStorage.setItem("blackpinkVotes", JSON.stringify(votes));
-      localStorage.setItem("blackpinkHasVoted", "true");
-      localStorage.setItem("blackpinkBias", memberName);
-
-      // Update bars
-      updateVoteBars();
-
-      // Add selected class
-      biasOptions.forEach((o) => o.classList.remove("selected"));
-      option.classList.add("selected");
-
-      // Show result
-      if (biasResult) {
-        biasResult.innerHTML = `
-          <div class="bias-result-content">
-            <i class="fas fa-heart" style="color: var(--pink); font-size: 2rem;"></i>
-            <h3>💗 ${memberName} is your bias! 💗</h3>
-            <p>You're officially part of the ${memberName} squad! Thanks for voting!</p>
-          </div>
-        `;
-        biasResult.classList.add("show");
-      }
-
-      showToast("success", `💗 You voted for ${memberName}!`);
-      createConfetti(50);
-    });
-
-    // Hover effects
-    option.addEventListener("mouseenter", () => {
-      option.style.transform = "scale(1.05)";
-    });
-
-    option.addEventListener("mouseleave", () => {
-      if (!option.classList.contains("selected")) {
-        option.style.transform = "";
-      }
-    });
-  });
-
-  // Show existing vote if user already voted
-  const existingBias = localStorage.getItem("blackpinkBias");
-  if (existingBias) {
-    const selectedOption = document.querySelector(
-      `.bias-option[data-member="${existingBias.toLowerCase()}"]`
-    );
-    if (selectedOption) {
-      selectedOption.classList.add("selected");
-      if (biasResult) {
-        biasResult.innerHTML = `
-          <div class="bias-result-content">
-            <i class="fas fa-heart" style="color: var(--pink); font-size: 2rem;"></i>
-            <h3>💗 ${existingBias} is your bias! 💗</h3>
-            <p>You're officially part of the ${existingBias} squad!</p>
-          </div>
-        `;
-        biasResult.classList.add("show");
-      }
-    }
-  }
 }
 
 // ====== AWARDS SECTION FUNCTIONS ======

@@ -56,9 +56,7 @@
           <li><a href="#facts" class="nav-link">Facts</a></li>
           <li><a href="#quiz" class="nav-link">Quiz</a></li>
           <li><a href="#concert" class="nav-link">Concert</a></li>
-          <li><a href="#countdown" class="nav-link">Event</a></li>
           <li><a href="#awards" class="nav-link">Awards</a></li>
-          <li><a href="#bias" class="nav-link">Bias</a></li>
         </ul>
         <button
           id="themeToggle"
@@ -360,28 +358,59 @@
 
       <!-- Quiz Section -->
       <section class="quiz-section" id="quiz">
+        <div class="quiz-bg-effects">
+          <div class="quiz-glow quiz-glow-1"></div>
+          <div class="quiz-glow quiz-glow-2"></div>
+          <div class="quiz-floating-icons">
+            <i class="fas fa-music"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-crown"></i>
+            <i class="fas fa-gem"></i>
+          </div>
+        </div>
         <div class="section-header">
-          <span class="section-tag">Interactive</span>
+          <span class="section-tag"><i class="fas fa-gamepad"></i> Interactive</span>
           <h2 class="section-title">BLINK Quiz</h2>
-          <p class="section-subtitle">How well do you know BLACKPINK?</p>
+          <p class="section-subtitle">Test your BLACKPINK knowledge with unlimited questions!</p>
         </div>
         <div class="quiz-container">
+          <div class="quiz-header-info">
+            <div class="quiz-badge">
+              <i class="fas fa-infinity"></i>
+              <span>Unlimited Questions</span>
+            </div>
+            <div class="quiz-badge">
+              <i class="fas fa-random"></i>
+              <span>Random Every Time</span>
+            </div>
+          </div>
           <div class="quiz-progress">
             <div class="quiz-progress-bar" id="quizProgressBar"></div>
+            <div class="quiz-progress-glow"></div>
           </div>
           <div class="quiz-card" id="quizCard">
+            <div class="quiz-card-decoration">
+              <span class="quiz-card-corner top-left"></span>
+              <span class="quiz-card-corner top-right"></span>
+              <span class="quiz-card-corner bottom-left"></span>
+              <span class="quiz-card-corner bottom-right"></span>
+            </div>
+            <div class="quiz-question-icon">
+              <i class="fas fa-question-circle"></i>
+            </div>
             <div class="quiz-question" id="quizQuestion">
-              Click Start to begin!
+              Ready to test your BLINK knowledge? 💗
             </div>
             <div class="quiz-options" id="quizOptions"></div>
             <div class="quiz-result" id="quizResult"></div>
           </div>
           <div class="quiz-controls">
-            <button class="btn btn-primary" id="startQuizBtn">
+            <button class="btn btn-primary quiz-btn-start" id="startQuizBtn">
               <i class="fas fa-play"></i> Start Quiz
             </button>
             <button
-              class="btn btn-secondary"
+              class="btn btn-secondary quiz-btn-next"
               id="nextQuizBtn"
               style="display: none"
             >
@@ -389,34 +418,6 @@
             </button>
           </div>
           <div class="quiz-score" id="quizScore"></div>
-        </div>
-      </section>
-
-      <!-- Newsletter Section -->
-      <section class="newsletter-section">
-        <div class="newsletter-content">
-          <div class="newsletter-icon">
-            <i class="fas fa-envelope-open-text"></i>
-          </div>
-          <h2>Join the BLINK Family</h2>
-          <p>Get updates on new releases, events, and exclusive content!</p>
-          <form class="newsletter-form" id="newsletterForm">
-            <div class="input-group">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                id="emailInput"
-              />
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Subscribe
-              </button>
-            </div>
-          </form>
-          <p class="newsletter-note">💗 No spam, only BLACKPINK magic!</p>
-        </div>
-        <div class="newsletter-decoration">
-          <div class="floating-hearts" id="floatingHearts"></div>
         </div>
       </section>
 
@@ -431,6 +432,8 @@
           </div>
           <div class="concert-stage">
             <div class="stage-lights">
+              <div class="light-beam"></div>
+              <div class="light-beam"></div>
               <div class="light-beam"></div>
               <div class="light-beam"></div>
               <div class="light-beam"></div>
@@ -512,36 +515,6 @@
         </div>
       </div>
 
-      <!-- Countdown Section -->
-      <section class="countdown-section" id="countdown">
-        <div class="countdown-bg"></div>
-        <div class="countdown-content">
-          <h2><i class="fas fa-calendar-star"></i> Next Big Event</h2>
-          <p class="countdown-event">BLACKPINK World Tour 2025</p>
-          <div class="countdown-timer" id="countdownTimer">
-            <div class="countdown-item">
-              <span class="countdown-number" id="days">00</span>
-              <span class="countdown-label">Days</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="hours">00</span>
-              <span class="countdown-label">Hours</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="minutes">00</span>
-              <span class="countdown-label">Minutes</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="seconds">00</span>
-              <span class="countdown-label">Seconds</span>
-            </div>
-          </div>
-          <button class="btn btn-primary countdown-btn">
-            <i class="fas fa-bell"></i> Get Notified
-          </button>
-        </div>
-      </section>
-
       <!-- Awards Section -->
       <section class="awards-section" id="awards">
         <div class="section-header">
@@ -580,52 +553,6 @@
             <h3>Forbes</h3>
             <p>Power List 2023</p>
           </div>
-        </div>
-      </section>
-
-      <!-- Bias Picker Section -->
-      <section class="bias-section" id="bias">
-        <div class="section-header">
-          <span class="section-tag">Fun</span>
-          <h2 class="section-title">Who's Your Bias?</h2>
-          <p class="section-subtitle">Vote for your favorite member!</p>
-        </div>
-        <div class="bias-container">
-          <div class="bias-options">
-            <button class="bias-option" data-member="jisoo">
-              <img src="images/Jisoo/JISOO WALLPAPER.jpg" alt="Jisoo" />
-              <span>Jisoo</span>
-              <div class="bias-votes">
-                <div class="bias-bar" style="--percentage: 25%"></div>
-                <span class="bias-percent">25%</span>
-              </div>
-            </button>
-            <button class="bias-option" data-member="jennie">
-              <img src="images/Jennie/Jennie Solo Wallpaper I xX_RACH_Xx.jpg" alt="Jennie" />
-              <span>Jennie</span>
-              <div class="bias-votes">
-                <div class="bias-bar" style="--percentage: 28%"></div>
-                <span class="bias-percent">28%</span>
-              </div>
-            </button>
-            <button class="bias-option" data-member="rose">
-              <img src="images/Rose/BLACKPINK ROSÉ ON THE GROUND WALLPAPER.jpg" alt="Rosé" />
-              <span>Rosé</span>
-              <div class="bias-votes">
-                <div class="bias-bar" style="--percentage: 24%"></div>
-                <span class="bias-percent">24%</span>
-              </div>
-            </button>
-            <button class="bias-option" data-member="lisa">
-              <img src="images/Lisa/download.jpg" alt="Lisa" />
-              <span>Lisa</span>
-              <div class="bias-votes">
-                <div class="bias-bar" style="--percentage: 23%"></div>
-                <span class="bias-percent">23%</span>
-              </div>
-            </button>
-          </div>
-          <div class="bias-result" id="biasResult"></div>
         </div>
       </section>
 
